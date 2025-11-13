@@ -28,6 +28,7 @@ module control_unit(
     localparam REG_X  = 3'b001;
     localparam REG_Y  = 3'b010;
     localparam REG_SP = 3'b011;
+    localparam REG_PC = 3'b100;
 
     always @(*) begin
         // Default values
@@ -49,15 +50,8 @@ module control_unit(
                 use_immediate = 1'b1;
             end
             
-            `OP_MOV: begin
-                alu_op = `OP_MOV;
-                reg_write_en = 1'b1;
-                reg_sel = REG_A;
-                use_immediate = 1'b0;
-            end
-            
-            `OP_ADD: begin
-                alu_op = `OP_ADD;
+            `OP_ADD, `OP_SUB, `OP_AND, `OP_OR, `OP_XOR, `OP_MOV: begin
+                alu_op = opcode;
                 reg_write_en = 1'b1;
                 reg_sel = REG_A;
                 flag_write_en = 1'b1;
@@ -66,6 +60,16 @@ module control_unit(
             
             `OP_BRA: begin
                 pc_sel = PC_BRANCH;
+            end
+            
+            // Cryptographic instructions 
+            `OP_AES_ENC, `OP_AES_DEC, `OP_SHA256_H, `OP_SHA256_K,
+            `OP_MOD_ADD, `OP_MOD_MUL, `OP_ROT_R, `OP_XOR3: begin
+                alu_op = opcode;
+                reg_write_en = 1'b1;
+                reg_sel = REG_A;
+                flag_write_en = 1'b1;
+                use_immediate = 1'b0;
             end
             
             default: begin

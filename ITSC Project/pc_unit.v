@@ -1,4 +1,3 @@
-// pc_unit_fixed.v
 `include "opcodes.v"
 
 module pc_unit(
@@ -9,7 +8,6 @@ module pc_unit(
     output reg [15:0] next_pc
 );
 
-    // Simple PC calculation
     always @(*) begin
         case(pc_sel)
             2'b00: next_pc = current_pc + 1;      // Normal increment

@@ -1,4 +1,3 @@
-// control_unit_fixed_tb.v - Updated Testbench
 `timescale 1ns/1ps
 `include "opcodes.v"
 
@@ -35,22 +34,22 @@ module control_unit_tb;
                  $time, instruction, alu_op, reg_write_en, reg_sel,
                  flag_write_en, use_immediate, immediate);
         
-        // Test ADD with register (immediate field = 0)
+        // Test ADD with register 
         #10;
         instruction = {`OP_ADD, `REG_X, 9'h000};
         flags = 4'b0000;
         
-        // Test ADD with immediate (immediate field != 0)
+        // Test ADD with immediate 
         #10;
         instruction = {`OP_ADD, `REG_X, 9'h789};
         
-        // Test INC (should use immediate=1)
+        // Test INC 
         #10;
-        instruction = {`OP_INC, 1'b0, 9'h123}; // Immediate should be ignored
+        instruction = {`OP_INC, 1'b0, 9'h123}; 
         
-        // Test DEC (should use immediate=1)  
+        // Test DEC   
         #10;
-        instruction = {`OP_DEC, 1'b0, 9'h456}; // Immediate should be ignored
+        instruction = {`OP_DEC, 1'b0, 9'h456}; 
         
         // Test CMP with register
         #10;

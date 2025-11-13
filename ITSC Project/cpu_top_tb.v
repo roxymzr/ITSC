@@ -16,7 +16,6 @@ module cpu_top_tb;
         .flags_out(flags_out)
     );
     
-    // Clock generation
     always #5 clk = ~clk;
     
     integer cycle_count = 0;

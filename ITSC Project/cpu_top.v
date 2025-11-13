@@ -10,7 +10,6 @@ module cpu_top(
     output [3:0] flags_out
 );
 
-    // Internal wires
     wire [15:0] instruction;
     wire [15:0] alu_result;
     wire [15:0] reg_data_out;
@@ -31,7 +30,6 @@ module cpu_top(
     wire [15:0] next_pc;
     wire [15:0] sp;
 
-    // Separate PC register
     reg [15:0] pc_reg;
     
     initial begin
@@ -49,7 +47,6 @@ module cpu_top(
     assign current_pc = pc_reg;
     assign pc_out = pc_reg;
 
-    // Module instantiations
     control_unit control(
         .instruction(instruction),
         .flags(flags_out),
@@ -108,7 +105,6 @@ module cpu_top(
         .next_pc(next_pc)
     );
 
-    // ALU input selection
     assign alu_a = a_out;
     wire [15:0] selected_register = (instruction[9] == 1'b0) ? x_out : y_out;
     assign alu_b = use_immediate ? immediate : selected_register;

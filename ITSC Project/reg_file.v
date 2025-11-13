@@ -1,4 +1,3 @@
-// reg_file_fixed.v
 `include "opcodes.v"
 
 module reg_file(
@@ -15,19 +14,15 @@ module reg_file(
     output reg [15:0] reg_x,
     output reg [15:0] reg_y,
     output reg [15:0] reg_sp
-    // REMOVED: reg_pc - PC is handled separately
 );
     
-    // Internal registers (NO PC)
     reg [15:0] a_reg, x_reg, y_reg, sp_reg;
     
-    // Register addresses (NO PC)
     localparam REG_A  = 3'b000;
     localparam REG_X  = 3'b001;
     localparam REG_Y  = 3'b010;
     localparam REG_SP = 3'b011;
 
-    // Initialize registers
     initial begin
         a_reg = 16'b0;
         x_reg = 16'b0;
@@ -41,7 +36,6 @@ module reg_file(
         reg_sp = 16'hFFFF;
     end
 
-    // Register write operation
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             a_reg <= 16'b0;
@@ -65,7 +59,6 @@ module reg_file(
         end
     end
 
-    // Register read operation
     always @(*) begin
         case(reg_sel)
             REG_A:  data_out = a_reg;
@@ -76,7 +69,6 @@ module reg_file(
         endcase
     end
     
-    // Continuous outputs
     always @(*) begin
         reg_a = a_reg;
         reg_x = x_reg;

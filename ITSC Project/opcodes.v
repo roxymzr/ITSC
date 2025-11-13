@@ -1,8 +1,7 @@
-// opcodes.v - Instruction definitions
 `ifndef OPCODES_V
 `define OPCODES_V
 
-// Instruction Opcodes (6-bit)
+// General Purpose Opcodes (6-bit)
 `define OP_LDI   6'b000000  // Load Immediate to X/Y
 `define OP_LDA   6'b000001  // Load from Address to X/Y
 `define OP_STA   6'b000010  // Store X/Y to Address
@@ -33,6 +32,16 @@
 `define OP_BRA   6'b011001  // Branch Always
 `define OP_JMP   6'b011010  // Jump to subroutine
 `define OP_RET   6'b011011  // Return from subroutine
+
+// ============ CRYPTOGRAPHIC EXTENSIONS ============
+`define OP_AES_ENC   6'b100000  // AES Encryption Round
+`define OP_AES_DEC   6'b100001  // AES Decryption Round  
+`define OP_SHA256_H  6'b100010  // SHA-256 Hash Compression
+`define OP_SHA256_K  6'b100011  // SHA-256 Constant
+`define OP_MOD_ADD   6'b100100  // Modular Addition
+`define OP_MOD_MUL   6'b100101  // Modular Multiplication
+`define OP_ROT_R     6'b100110  // Right Rotation
+`define OP_XOR3      6'b100111  // 3-input XOR
 
 // Register selection
 `define REG_X    1'b0

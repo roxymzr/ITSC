@@ -1,4 +1,3 @@
-// alu_tb.v - COMPLETE ALU Testbench
 `timescale 1ns/1ps
 `include "opcodes.v"
 
@@ -8,7 +7,6 @@ module alu_tb;
     wire [15:0] result;
     wire zero, negative, carry, overflow;
     
-    // Instantiate the ALU
     alu uut(
         .a(a),
         .b(b), 

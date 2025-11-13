@@ -1,4 +1,3 @@
-// reg_file_tb.v - Register File Testbench
 `timescale 1ns/1ps
 `include "opcodes.v"
 
@@ -30,7 +29,6 @@ module reg_file_tb;
         .reg_pc(reg_pc)
     );
     
-    // Clock generation
     always #5 clk = ~clk;
     
     initial begin
@@ -40,7 +38,6 @@ module reg_file_tb;
                  $time, reg_sel, write_en, data_in, data_out, 
                  reg_a, reg_x, reg_y, reg_sp, reg_pc, flags_out);
         
-        // Initialize
         clk = 0;
         rst = 1;
         write_en = 0;
@@ -48,7 +45,6 @@ module reg_file_tb;
         #20;
         rst = 0;
         
-        // Test writing to registers
         #10;
         reg_sel = 3'b000; // A
         data_in = 16'h1234;
@@ -73,7 +69,6 @@ module reg_file_tb;
         #10;
         write_en = 0;
         
-        // Test reading from registers
         #10;
         reg_sel = 3'b000; // Read A
         
@@ -83,7 +78,6 @@ module reg_file_tb;
         #10;
         reg_sel = 3'b010; // Read Y
         
-        // Test flag writing
         #10;
         flag_in = 4'b1010; // Z=1, N=0, C=1, O=0
         flag_write_en = 1;
